@@ -1,4 +1,4 @@
-'use strict';
+it'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Topics', {
