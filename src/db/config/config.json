@@ -23,6 +23,6 @@
     "dialect": "postgres",
     "logging": false,
    "operatorsAliases": false,
-   "use_env_variable": "postgresql-asymmetrical-69011"
+   "use_env_variable": "DATABASE_URL"
   }
 }
