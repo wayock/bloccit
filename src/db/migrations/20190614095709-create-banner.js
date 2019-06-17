@@ -29,7 +29,16 @@ module.exports = {
            model: "Topics",
            key: "id",
            as: "topicId",
-       },
+         },
+      },
+      advertisementId: {
+         type: DataTypes.INTEGER,
+         onDelete: "CASCADE",
+         references: {
+           model: "Advertisements",
+           key: "id",
+           as: "advertisementId",
+         },
       }
     });
   },
