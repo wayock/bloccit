@@ -13,7 +13,12 @@ module.exports = {
       })
     },
   getPost(id, callback){
-     return Post.findByPk(id)
+     return Post.findByPk(id, {
+       include: [{
+         model: Flair,
+         as: "flairs"
+      }]
+     })
      .then((post) => {
        callback(null, post);
      })
