@@ -10,14 +10,24 @@ module.exports = {
       let newFlair= {
         name: req.body.name,
         color: req.body.color,
-        postId: req.params.postId
+
       };
       flairQueries.addFlair(newFlair, (err, post) => {
         if(err){
-          res.redirect(500, "`posts/${this.post.id}/flairs/new`");
+          res.redirect(500, `/flairs/new`);
         } else {
-          res.redirect(303, "`/topics/${topic.id}/posts/${post.id}`");
+          res.redirect(303, `/flairs/${flair.id}`);
         }
       });
-    }
+    },
+
+  show(req, res, next){
+       flairQueries.getFlair(req.params.id, (err, post) => {
+         if(err || flair == null){
+           res.redirect(404, "/");
+         } else {
+           res.render("flair/show", {flair});
+         }
+       });
+     },   
 }

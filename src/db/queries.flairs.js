@@ -11,5 +11,15 @@ module.exports = {
      .catch((err) => {
        callback(err);
      })
-   }
+   },
+
+  getFlair(id, callback){
+    return Flair.findByPk(id)
+    .then((flair) => {
+      callback(null, flair);
+    })
+    .catch((err) => {
+      callback(err);
+    })
+  }
 }

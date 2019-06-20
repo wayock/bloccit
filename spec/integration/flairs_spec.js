@@ -65,7 +65,7 @@ describe("routes : posts", () => {
 
      });
 
-    describe("POST /topics/:topicId/posts/create", () => {
+    describe("POST /posts/:postId/flair/create", () => {
 
         it("should create a new flair and redirect", (done) => {
            const options = {
@@ -95,5 +95,18 @@ describe("routes : posts", () => {
          });
 
       });
+
+
+    describe("GET /posts/:postId/flairs/:id", () => {
+
+       it("should render a view with the selected flair", (done) => {
+         request.get(`${base}/${this.post.id}/flairs/${this.flair.id}`, (err, res, body) => {
+           expect(err).toBeNull();
+           expect(body).toContain("ice cream");
+           done();
+         });
+       });
+
+     });
 
 });
