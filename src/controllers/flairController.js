@@ -14,9 +14,9 @@ module.exports = {
       };
       flairQueries.addFlair(newFlair, (err, post) => {
         if(err){
-          res.redirect(500, "`posts/${this.post.id}/flairs/new");
+          res.redirect(500, "`posts/${this.post.id}/flairs/new`");
         } else {
-          res.redirect(303, `/topics/${newPost.topicId}/posts/${post.id}`);
+          res.redirect(303, "`/topics/${topic.id}/posts/${post.id}`");
         }
       });
     }

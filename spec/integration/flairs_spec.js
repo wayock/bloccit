@@ -30,8 +30,10 @@ describe("routes : posts", () => {
         })
         .then((post) => {
           this.post = post;
-        });
+          //console.log('Setting post')
 
+
+          //console.log('Creating flair')
         Flair.create({
           name: "beach related",
           color: "yellow",
@@ -41,11 +43,13 @@ describe("routes : posts", () => {
           this.flair = flair;
           done();
         });
+
       })
         .catch((err) => {
           console.log(err);
           done();
         });
+      });
       });
     });
 
@@ -76,10 +80,10 @@ describe("routes : posts", () => {
 
                Flair.findOne({where: {name: "Ice cream"}})
                .then((flair) => {
-                 expect(post).not.toBeNull();
-                 expect(post.name).toBe("Ice cream");
-                 expect(post.color).toBe("white");
-                 expect(post.postId).not.toBeNull();
+                 expect(flair).not.toBeNull();
+                 expect(flair.name).toBe("Ice cream");
+                 expect(flair.color).toBe("white");
+                 expect(flair.postId).not.toBeNull();
                  done();
                })
                .catch((err) => {
