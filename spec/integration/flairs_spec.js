@@ -169,7 +169,8 @@ describe("routes : posts", () => {
             const options = {
               url: `${base}/${this.post.id}/flairs/${this.flair.id}/update`,
               form: {
-                name: "beach related"
+                name: "beach related",
+                color: "yellow"
               }
             };
             request.post(options,
