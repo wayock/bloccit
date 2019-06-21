@@ -68,6 +68,8 @@ describe("routes : posts", () => {
     describe("POST /posts/:postId/flair/create", () => {
 
         it("should create a new flair and redirect", (done) => {
+          console.log("post id:");
+          console.log(this.post.id);
            const options = {
              url: `${base}/${this.post.id}/flairs/create`,
              form: {
@@ -77,7 +79,7 @@ describe("routes : posts", () => {
            };
            request.post(options,
              (err, res, body) => {
-
+              console.log(err);
                Flair.findOne({where: {name: "Ice cream"}})
                .then((flair) => {
                  expect(flair).not.toBeNull();
@@ -90,6 +92,7 @@ describe("routes : posts", () => {
                  console.log(err);
                  done();
                });
+
              }
            );
          });
@@ -100,13 +103,38 @@ describe("routes : posts", () => {
     describe("GET /posts/:postId/flairs/:id", () => {
 
        it("should render a view with the selected flair", (done) => {
+
          request.get(`${base}/${this.post.id}/flairs/${this.flair.id}`, (err, res, body) => {
            expect(err).toBeNull();
-           expect(body).toContain("ice cream");
+           expect(body).toContain("beach related");
            done();
          });
        });
 
      });
+
+    describe("POST /posts/:postId/flairs/:id/destroy", () => {
+
+         it("should delete the flair with the associated ID", (done) => {
+
+    //#1
+           Flair.findAll().then(flairs => {
+           expect(flairs[0].id).toBe(1);
+
+           request.post(`${base}/${this.post.id}/flairs/${this.flair.id}/destroy`, (err, res, body) => {
+
+    //#2
+             Flair.findByPk(1)
+             .then((flair) => {
+               expect(err).toBeNull();
+               expect(flair).toBeNull();
+               done();
+             })
+           });
+
+         });
+      });
+  });
+
 
 });
