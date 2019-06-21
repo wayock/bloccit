@@ -38,7 +38,7 @@ module.exports = {
           if(err){
             res.redirect(500, `/posts/${req.params.postId}/flairs/${req.params.id}`)
           } else {
-            res.redirect(303, `/topics/${req.params.topicId}/posts/${req.params.postId}`)
+            res.redirect(303, `/posts/${req.params.postId}`)
           }
         });
       },
@@ -51,6 +51,16 @@ module.exports = {
            res.render("flairs/edit", {flair});
          }
        });
-   }
+   },
+
+   update(req, res, next){
+        flairQueries.updateFlair(req.params.id, req.color, (err, flair) => {
+          if(err || flair == null){
+            res.redirect(404, `/posts/${req.params.postId}/flairs/${req.params.id}/edit`);
+          } else {
+            res.redirect(`/posts/${req.params.postId}/flairs/${req.params.id}`);
+          }
+        });
+      }
 
 }

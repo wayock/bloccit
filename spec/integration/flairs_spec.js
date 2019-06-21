@@ -150,4 +150,43 @@ describe("routes : posts", () => {
 
        });
 
+    describe("POST /posts/:postId/flairs/:id/update", () => {
+
+        it("should return a status code 302", (done) => {
+          request.post({
+            url: `${base}/${this.post.id}/flairs/${this.flair.id}/update`,
+            form: {
+              name: "beach related",
+              color: "yellow"
+            }
+          }, (err, res, body) => {
+            expect(res.statusCode).toBe(302);
+            done();
+          });
+        });
+
+        it("should update the flair with the given values", (done) => {
+            const options = {
+              url: `${base}/${this.post.id}/flairs/${this.flair.id}/update`,
+              form: {
+                name: "beach related"
+              }
+            };
+            request.post(options,
+              (err, res, body) => {
+
+              expect(err).toBeNull();
+
+              Flair.findOne({
+                where: {id: this.flair.id}
+              })
+              .then((flair) => {
+                expect(flair.name).toBe("beach related");
+                done();
+              });
+            });
+        });
+
+      });
+
 });

@@ -34,4 +34,23 @@ module.exports = {
          callback(err);
        })
      },
+
+  updateFlair(id, updatedFlair, callback){
+      return Flair.findByPk(id)
+      .then((flair) => {
+        if(!flair){
+          return callback("Flair not found");
+        }
+        console.log(updatedFlair);
+        flair.update(updatedFlair, {
+          fields: Object.keys(updatedFlair)
+        })
+        .then(() => {
+          callback(null, flair);
+        })
+        .catch((err) => {
+          callback(err);
+        });
+      });
+    }
 }
