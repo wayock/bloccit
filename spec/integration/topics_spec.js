@@ -4,7 +4,27 @@ const base = "http://localhost:3000/topics/";
 const sequelize = require("../../src/db/models/index").sequelize;
 const Topic = require("../../src/db/models").Topic;
 
-
+function authorizeUser(role, done) { // helper function to create and authorize new user
+  User.create({
+    email: "#{role}@example.com",
+    password: "123456",
+    role: role
+  })
+  .then((user) => {
+    request.get({         // mock authentication
+      url: "http://localhost:3000/auth/fake",
+      form: {
+        role: user.role,     // mock authenticate as `role` user
+        userId: user.id,
+        email: user.email
+      }
+    },
+      (err, res, body) => {
+        done();
+      }
+    );
+  });
+}
 
 describe("routes : topics", () => {
   beforeEach((done) => {
