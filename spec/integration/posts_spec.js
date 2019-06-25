@@ -67,8 +67,9 @@ describe("routes : posts", () => {
         form: {
           title: "Watching snow melt",
           body: "Without a doubt my favoriting things to do besides watching paint dry!",
-          topicId: this.topic.id
-          //
+          topicId: this.topic.id,
+          userId: this.user.id
+
         }
       };
       request.post(options,
@@ -76,13 +77,11 @@ describe("routes : posts", () => {
 
           Post.findOne({where: {title: "Watching snow melt"}})
           .then((post) => {
-            console.log(post);
-            //
+
             expect(post).not.toEqual(null);
             expect(post.title).toBe("Watching snow melt");
             expect(post.body).toBe("Without a doubt my favoriting things to do besides watching paint dry!");
             expect(post.topicId).not.toEqual(null);
-            //
             done();
           })
           .catch((err) => {
