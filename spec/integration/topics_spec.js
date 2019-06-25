@@ -185,9 +185,10 @@ beforeEach((done) => {
 
    });
  })
+  //end tests for admin
 
   // #3: define the member user context
-  describe("member user performing CRUD actions for Topic", () => {
+describe("member user performing CRUD actions for Topic", () => {
 
   // #4: Send mock request and authenticate as a member user
     beforeEach((done) => {
@@ -202,6 +203,7 @@ beforeEach((done) => {
         }
       );
     });
+
     describe("GET /topics", () => {
 
       it("should return a status code 200 and all topics", (done) => {
@@ -220,7 +222,7 @@ beforeEach((done) => {
      it("should render a new topic form", (done) => {
        request.get(`${base}new`, (err, res, body) => {
          expect(err).toBeNull();
-         expect(body).toContain("New Topic");
+         expect(body).toContain("Topics");
          done();
        });
      });
@@ -235,7 +237,7 @@ beforeEach((done) => {
          }
        };
 
-       it("should create a new topic and redirect", (done) => {
+       it("should not create a new topic", (done) => {
 
     //#1
          request.post(options,
@@ -244,9 +246,7 @@ beforeEach((done) => {
            (err, res, body) => {
              Topic.findOne({where: {title: "blink-182 songs"}})
              .then((topic) => {
-               expect(res.statusCode).toBe(303);
-               expect(topic.title).toBe("blink-182 songs");
-               expect(topic.description).toBe("What's your favorite blink-182 song?");
+               expect(topic).toBeNull(); // no topic should be returned
                done();
              })
              .catch((err) => {
@@ -270,7 +270,7 @@ beforeEach((done) => {
 
      describe("POST /topics/:id/destroy", () => {
 
-       it("should delete the topic with the associated ID", (done) => {
+       it("should not delete the topic with the associated ID", (done) => {
 
     //#1
          Topic.findAll()
@@ -286,7 +286,7 @@ beforeEach((done) => {
              Topic.findAll()
              .then((topics) => {
                expect(err).toBeNull();
-               expect(topics.length).toBe(topicCountBeforeDelete - 1);
+               expect(topics.length).toBe(topicCountBeforeDelete);
                done();
              })
            });
@@ -296,10 +296,10 @@ beforeEach((done) => {
 
      describe("GET /topics/:id/edit", () => {
 
-        it("should render a view with an edit topic form", (done) => {
+        it("should not render a view with an edit topic form", (done) => {
           request.get(`${base}${this.topic.id}/edit`, (err, res, body) => {
             expect(err).toBeNull();
-            expect(body).toContain("Edit Topic");
+            expect(body).not.toContain("Edit Topic");
             expect(body).toContain("JS Frameworks");
             done();
           });
@@ -326,13 +326,13 @@ beforeEach((done) => {
                where: { id: this.topic.id }
              })
              .then((topic) => {
-               expect(topic.title).toBe("JavaScript Frameworks");
+               expect(topic.title).toBe("JS Frameworks");
                done();
              });
            });
       });
 
      });
-   });
+  });
 
 });
