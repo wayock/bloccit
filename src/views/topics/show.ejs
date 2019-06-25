@@ -17,7 +17,9 @@
       <hr>
 
          <h1>Posts</h1>
-         <a href="/topics/<%= topic.id %>/posts/new" class="btn btn-success">New Post</a>
+         <% if(currentUser) { %>
+           <a href="/topics/<%= topic.id %>/posts/new" class="btn btn-success">New Post</a>
+         <% } %>
          <ul class="list-group">
            <% topic.posts.forEach((post) => { %>
              <li class="list-group-item">
