@@ -38,12 +38,3 @@ module.exports = (sequelize, DataTypes) => {
   return User;
 
 };
-
-/*
-
- sequelize db:migrate:undo --name 20190627185227-create-comment --env test
-sequelize db:migrate:undo --name 20190618122424-create-post.js --env test
-sequelize db:migrate:undo --name 20190622152314-create-user.js --env test
-sequelize db:migrate:undo --name 20190612100223-create-topic.js --env test
-
-*/
