@@ -40,7 +40,7 @@ module.exports = {
         })
       },
     updatePost(req, updatedPost, callback){
-         return Post.findById(id)
+         return Post.findByPk(req.params.id)
          .then((post) => {
            if(!post){
              return callback("Post not found");

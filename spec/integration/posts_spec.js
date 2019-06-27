@@ -6,6 +6,7 @@ const sequelize = require("../../src/db/models/index").sequelize;
 const Topic = require("../../src/db/models").Topic;
 const Post = require("../../src/db/models").Post;
 const User = require("../../src/db/models").User;
+//const PostPolicy = require("../../src/policies").Post;
 
 describe("routes : posts", () => {
 
@@ -159,6 +160,7 @@ describe("routes : posts", () => {
                body: "I love watching them melt slowly."
              }
            }, (err, res, body) => {
+
              expect(res.statusCode).not.toBe(302);
              done();
            });
@@ -321,7 +323,9 @@ describe("POST /topics/:topicId/posts/create", () => {
            url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
            form: {
              title: "Snowman Building Competition",
-             body: "I love watching them melt slowly."
+             body: "I love watching them melt slowly.",
+             topicId: this.topic.id,
+             userId: this.user.id
            }
          }, (err, res, body) => {
            expect(res.statusCode).toBe(302);
