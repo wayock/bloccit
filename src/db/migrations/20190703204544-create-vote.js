@@ -13,7 +13,8 @@ module.exports = {
         allowNull: false,
         validate: {
           isIn: [[-1, 1]]
-        },
+        }
+      },
       postId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
@@ -32,7 +33,8 @@ module.exports = {
           model: "Users",
           key: "id",
           as: "userId"
-        },
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
