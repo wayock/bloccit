@@ -138,7 +138,6 @@ describe("routes : favorites", () => {
             }
           })
           .then((favorite) => {               // confirm that a favorite was created
-            console.log(favorite);
             expect(favorite).not.toBeNull();
             expect(favorite.userId).toBe(this.user.id);
             expect(favorite.postId).toBe(this.post.id);
