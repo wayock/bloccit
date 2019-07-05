@@ -10,6 +10,8 @@
 
       <% include ../static/partials/messages.ejs %>
 
+      <a href="/topics/<%= post.topicId %>"> Go Back to Topic </a>
+
       <div style="display: flex; align-items:center;">
         <% if(currentUser) { %>
           <% include ../votes/voting.ejs %>
@@ -24,7 +26,7 @@
       <% if(currentUser) { %>
         <% include ../favorites/favoriting.ejs %>
       <% } %>
-      
+
       <p><%= post.body %></p>
 
         <section id="comment-form">
@@ -45,6 +47,8 @@
               <% }) %>
             <% } %>
         </section>
+
+
 
     </main>
 
