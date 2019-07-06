@@ -1,5 +1,7 @@
 // #1
 const User = require("./models").User;
+const Post = require("./models").Post;
+const Comment = require("./models").Comment;
 const bcrypt = require("bcryptjs");
 
 module.exports = {
@@ -21,6 +23,37 @@ module.exports = {
     .catch((err) => {
       callback(err);
     })
-  }
+  },
+
+  getUser(id, callback){
+   // #1
+      let result = {};
+      User.findByPk(id)
+      .then((user) => {
+   // #2
+        if(!user) {
+          callback(404);
+        } else {
+   // #3
+          result["user"] = user;
+   // #4
+          Post.scope({method: ["lastFiveFor", id]}).findAll()
+          .then((posts) => {
+   // #5
+            result["posts"] = posts;
+   // #6
+            Comment.scope({method: ["lastFiveFor", id]}).findAll()
+            .then((comments) => {
+   // #7
+              result["comments"] = comments;
+              callback(null, result);
+            })
+            .catch((err) => {
+              callback(err);
+            })
+          })
+        }
+      })
+    }
 
 }

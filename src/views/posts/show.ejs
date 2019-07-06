@@ -10,7 +10,7 @@
 
       <% include ../static/partials/messages.ejs %>
 
-      <a href="/topics/<%= post.topicId %>"> Go Back to Topic </a>
+      <a class="btn btn-outline-primary" href="/topics/<%= post.topicId %>">Go Back to Topic</a>
 
       <div style="display: flex; align-items:center;">
         <% if(currentUser) { %>
