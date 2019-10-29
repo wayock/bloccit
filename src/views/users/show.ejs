@@ -11,19 +11,15 @@
 
       <% include ../static/partials/messages.ejs %>
 
- <!-- #1 -->
       <h1><%= `${user.email}'s profile` %></h1>
 
       <hr>
-
+      <br>
       <h2> Latest Posts</h2>
 
       <ul class="list-unstyled">
-
- <!-- #2 -->terminal
         <% if(posts) { %>
           <% posts.forEach((post) => { %>
- <!-- #3 -->
             <li>
               <a href="/topics/<%= post.topicId %>/posts/<%= post.id %>">
                 <%= post.title %>
@@ -33,7 +29,7 @@
         <% } %>
       </ul>
       <hr>
-
+      <br>
       <h2> Latest Comments</h2>
 
       <ul class="list-unstyled">
