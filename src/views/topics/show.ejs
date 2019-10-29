@@ -6,36 +6,41 @@
   <body>
     <% include ../static/partials/navbar.ejs %>
 
-    <main class="container">
-      <h1><%= topic.title %></h1>
+    <main class="container ">
+      <div>
+        <a class="btn btn-outline-primary" href="/topics/">Go Back</a>
+      </div>
+      <br>
+      <div class="jumbotron-fluid">
+        <h1><%= topic.title %></h1>
+         <% if(currentUser) { %>
+              <% if(currentUser.isAdmin()) { %>
+              <a href="/topics/<%= topic.id %>/edit" class="btn btn-primary">Edit</a>
 
-     <% if(currentUser) { %>
-       <a href="/topics/<%= topic.id %>/posts/new" class="btn btn-success">New Post</a>
-          <% if(currentUser.isAdmin()) { %>
-          <a href="/topics/<%= topic.id %>/edit" class="btn btn-warning">Edit</a>
-
-          <form style="display:initial" action="/topics/<%= topic.id %>/destroy" method="post">
-            <button type="submit" class="btn btn-danger">Delete</button>
-          </form>
-        <% } %>
-     <% } %>
-
-      <p><%= topic.description %></p>
+              <form style="display:initial" action="/topics/<%= topic.id %>/destroy" method="post">
+                <button type="submit" class="btn btn-primary">Delete</button>
+              </form>
+            <% } %>
+         <% } %>
+         <br>
+         <br>
+        <p><%= topic.description %></p>
+      </div>
       <hr>
-
-         <h1>Posts</h1>
-
-           <a href="/topics/<%= topic.id %>/posts/new" class="btn btn-success">New Post</a>
-
-
-         <ul class="list-group">
-           <% topic.posts.forEach((post) => { %>
-             <li class="list-group-item">
-               <a href="/topics/<%= topic.id %>/posts/<%= post.id %>"> <%= post.title %> </a>
-             </li>
-           <% }) %>
-        
-         </ul>
+      <br>
+        <div class="col-10 mx-auto p-3 mb-2 bg-light text-dark border border-dark">
+           <h1 class="text-center">Posts</h1>
+             <a href="/topics/<%= topic.id %>/posts/new" class="btn btn-primary">New Post</a>
+             <br>
+             <br>
+             <ul class="list-group">
+               <% topic.posts.forEach((post) => { %>
+                 <li class="list-group-item">
+                   <a href="/topics/<%= topic.id %>/posts/<%= post.id %>"> <%= post.title %> </a>
+                 </li>
+               <% }) %>
+             </ul>
+        </div>
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>

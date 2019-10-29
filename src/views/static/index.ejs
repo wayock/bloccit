@@ -14,27 +14,40 @@
         <% include ./partials/messages.ejs %>
 
         <!-- Jumbotron Header -->
-        <header class="jumbotron my-4">
+        <header class="jumbotron my-4 text-center">
           <h1 class="display-3">Welcome to Bloccit</h1>
           <p class="lead">An application for users to share information.</p>
+          <br>
+          <br>
+          <% if(currentUser) { %>
+            <a href="/topics/" class="btn btn-primary btn-lg" >View Topics</a>
+          <% } else { %>
           <a href="/users/sign_up" class="btn btn-primary btn-lg">Sign up</a>
+          <a href="/users/sign_in" class="btn btn-primary btn-lg">Sign in</a>
+          <% }%>
         </header>
+
+        <br>
+        <br>
 
         <!-- Page Features -->
         <section class="row text-center">
 
           <section class="col-lg-4">
             <h4 class="card-title">Post</h4>
+            <ion-icon name="paper-plane" style= "font-size: 100px;"></ion-icon>
             <p class="card-text">Share your thoughts about subjects that are important to you.</p>
           </section>
 
           <section class="col-lg-4">
             <h4 class="card-title">Comment</h4>
+            <ion-icon name="paper" style= "font-size: 100px;"></ion-icon>
             <p class="card-text">Your opinion counts! But you have to make yourself heard first!</p>
           </section>
 
           <section class="col-lg-4">
             <h4 class="card-title">Stay Informed</h4>
+            <ion-icon name="bulb" style= "font-size: 100px;"></ion-icon>
             <p class="card-text">See the most active topics as well as trending subjects every day!</p>
           </section>
 

@@ -6,48 +6,51 @@
   <body>
     <% include ../static/partials/navbar.ejs %>
 
-    <main class="container">
+    <main class="container p-3 mb-2 bg-light text-dark border border-dark">
 
       <% include ../static/partials/messages.ejs %>
 
       <a class="btn btn-outline-primary" href="/topics/<%= post.topicId %>">Go Back to Topic</a>
-
+      <br>
+      <br>
       <div style="display: flex; align-items:center;">
         <% if(currentUser) { %>
           <% include ../votes/voting.ejs %>
         <% } %>
           <h1><%= post.title %></h1>
       </div>
-            <a href="/topics/<%= post.topicId %>/posts/<%= post.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/topics/<%= post.topicId %>/posts/<%= post.id %>/edit" class="btn btn-primary">Edit</a>
             <form style="display:initial" action="/topics/<%= post.topicId %>/posts/<%= post.id %>/destroy" method="post">
-              <button type="submit" class="btn btn-danger">Delete</button>
+              <button type="submit" class="btn btn-primary">Delete</button>
             </form>
 
       <% if(currentUser) { %>
         <% include ../favorites/favoriting.ejs %>
       <% } %>
+      <br>
+      <br>
+      <h3><%= post.body %></h3>
+      <br>
+        <div class="col-10 mx-auto border-dark">
+          <section id="comment-form">
 
-      <p><%= post.body %></p>
+            <!-- #1 -->
+              <% if(currentUser) { %>
+                <% include ../comments/new.ejs %>
+              <% } %>
+             </section>
 
-        <section id="comment-form">
+            <!-- #2 -->
+             <section id="comment-list">
+              <% if(post.comments) { %>
+                <% post.comments.forEach((comment) => { %>
 
-          <!-- #1 -->
-            <% if(currentUser) { %>
-              <% include ../comments/new.ejs %>
-            <% } %>
-           </section>
-
-          <!-- #2 -->
-           <section id="comment-list">
-            <% if(post.comments) { %>
-              <% post.comments.forEach((comment) => { %>
-
-          <!-- #3 -->
-                <%- include("../comments/show.ejs", {comment}) %>
-              <% }) %>
-            <% } %>
-        </section>
-
+            <!-- #3 -->
+                  <%- include("../comments/show.ejs", {comment}) %>
+                <% }) %>
+              <% } %>
+          </section>
+        </div>
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>

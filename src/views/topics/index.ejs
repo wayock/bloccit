@@ -4,23 +4,28 @@
     <% include ../static/partials/head.ejs %>
   </head>
   <body>
-    <main class="container">
+    <main class="container border rounded border-dark bg-light ">
       <% include ../static/partials/navbar.ejs %>
-
-      <h1>Topics</h1>
-
-      <% if(currentUser && currentUser.isAdmin()) { %>
-         <a href="/topics/new" class="btn btn-success">New Topic</a>
-      <% } %>
-
-      <ul class="list-group">
-<!-- #1 -->
+      <br>
+      <br>
+      <h1 class="text-center">Topics</h1>
+      <br>
+      <br>
+      <div class="text-center mx-auto">
+        <% if(currentUser && currentUser.isAdmin()) { %>
+           <a href="/topics/new" class="btn btn-success">New Topic</a>
+        <% } %>
+      </div>
+      <br>
+      <br>
+      <ul class="list-group col-8 mx-auto">
         <% topics.forEach((topic) => { %>
-<!-- #2 -->
           <li class="list-group-item">
             <a href="/topics/<%= topic.id %>"> <%= topic.title %> </a>
           </li>
         <% }) %>
+        <br>
+        <br>
       </ul>
 
     </main>
